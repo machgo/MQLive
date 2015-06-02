@@ -20,7 +20,8 @@ public class MyLocationListener implements LocationListener
         Log.i("location Changed", location.toString());
         try
         {
-            DataSender.getInstance().sendData(location.toString());
+            DataSender.getInstance().sendData(TrackPoint.getJson(location));
+            .
         } catch (IOException e)
         {
             e.printStackTrace();

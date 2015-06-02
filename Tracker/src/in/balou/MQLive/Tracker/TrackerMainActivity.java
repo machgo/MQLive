@@ -25,7 +25,7 @@ public class TrackerMainActivity extends Activity
         try
         {
             DataSender.getInstance().connectTo(this, "tcp://188.166.105.27:1883", "TestClient");
-            DataSender.getInstance().sendData("aaaaaaaa");
+            DataSender.getInstance().sendData("starting Tracking");
         } catch (MqttException e)
         {
             e.printStackTrace();
