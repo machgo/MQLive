@@ -9,5 +9,15 @@
             android:layout_height="wrap_content"
             android:text="Hello World, TrackerMainActivity"
             />
+    <Button android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:text="start"
+            android:onClick="buttonOn"
+            android:id="@+id/buttonOn"/>
+    <Button android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:text="stop"
+            android:onClick="buttonOff"
+            android:id="@+id/buttonOff"/>
 </LinearLayout>
 

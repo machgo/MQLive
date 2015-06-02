@@ -3,7 +3,6 @@ package in.balou.MQLive.Tracker;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
@@ -21,7 +20,7 @@ public class MyLocationListener implements LocationListener
         try
         {
             DataSender.getInstance().sendData(TrackPoint.getJson(location));
-            .
+
         } catch (IOException e)
         {
             e.printStackTrace();

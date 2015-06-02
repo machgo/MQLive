@@ -3,6 +3,9 @@ package in.balou.MQLive.Tracker;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Switch;
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
@@ -19,21 +22,32 @@ public class TrackerMainActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        isOn = false;
         setContentView(layout.main);
+    }
 
-        Intent i = new Intent(this, TrackerService.class);
-        try
+    private Intent backgroundService;
+    private boolean isOn;
+
+
+    public void buttonOn(View view)
+    {
+        if (!isOn)
         {
-            DataSender.getInstance().connectTo(this, "tcp://188.166.105.27:1883", "TestClient");
-            DataSender.getInstance().sendData("starting Tracking");
-        } catch (MqttException e)
-        {
-            e.printStackTrace();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
+            Log.d("buttonOn", "starting");
+            isOn = true;
+            backgroundService = new Intent(this, TrackerService.class);
+            startService(backgroundService);
         }
-        startService(i);
+    }
 
+    public void buttonOff(View view)
+    {
+        if (isOn)
+        {
+            Log.d("buttonOff", "stoping");
+            isOn = false;
+            stopService(backgroundService);
+        }
     }
 }
