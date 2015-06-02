@@ -13,7 +13,7 @@ public class MySensorListener implements SensorEventListener
     @Override
     public void onSensorChanged(SensorEvent event)
     {
-        Log.i("Pressure changed ", String.valueOf(event.values[0]));
+        Log.i("Sensor changed ", String.valueOf(event.values[0]));
     }
 
     @Override

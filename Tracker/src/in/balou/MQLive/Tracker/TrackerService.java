@@ -27,9 +27,8 @@ public class TrackerService extends Service
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         MyLocationListener listener = new MyLocationListener();
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 8000, 0, listener);
+        //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 0, listener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, listener);
-
 
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         Sensor pressure = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
