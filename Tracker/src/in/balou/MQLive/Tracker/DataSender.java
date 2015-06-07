@@ -63,6 +63,4 @@ public class DataSender
             Log.d(getClass().getCanonicalName(), "Delivery complete");
         }
     }
-
-
 }

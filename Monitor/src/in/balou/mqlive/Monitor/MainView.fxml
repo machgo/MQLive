@@ -1,0 +1,19 @@
+<?import com.lynden.gmapsfx.GoogleMapView?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<GridPane fx:controller="in.balou.mqlive.Monitor.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" prefHeight="750.0" prefWidth="761.0">
+    <VBox>
+        <GoogleMapView fx:id="mapView" prefHeight="750.0" prefWidth="761.0"/>
+        <LineChart fx:id="altitudeGraph" prefWidth="761.0" prefHeight="100.0">
+            <xAxis>
+                <NumberAxis fx:id="xAxis" side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="yAxis" side="LEFT"/>
+            </yAxis>
+        </LineChart>
+    </VBox>
+</GridPane>
