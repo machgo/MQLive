@@ -1,5 +1,7 @@
 package in.balou.mqlive.Monitor;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import org.eclipse.paho.client.mqttv3.*;
 
 import java.util.ArrayList;
@@ -12,6 +14,9 @@ public class MqData
     private MqttClient client;
     private ArrayList<Observer> observers;
     private ArrayList<TrackPoint> points;
+
+    public DoubleProperty lowestAltitude;
+    public DoubleProperty highestAltitude;
 
     public ArrayList<TrackPoint> getPoints()
     {
@@ -27,6 +32,8 @@ public class MqData
         String serverName = "tcp://188.166.105.27:1883";
         observers = new ArrayList<Observer>();
         points = new ArrayList<TrackPoint>();
+        lowestAltitude = new SimpleDoubleProperty(0.0);
+        highestAltitude = new SimpleDoubleProperty(2000.0);
 
         try
         {
@@ -46,7 +53,14 @@ public class MqData
                     System.out.printf("From (%s):", s);
                     String message = new String(mqttMessage.getPayload());
                     System.out.println(message);
-                    points.add(new TrackPoint(message));
+
+                    TrackPoint t = new TrackPoint(message);
+                    points.add(t);
+                    if (lowestAltitude.getValue() > t.getAltitude() || lowestAltitude.getValue() == 0.0)
+                        lowestAltitude.setValue(t.getAltitude());
+
+
+                    //inform Observers
                     informAll();
                 }
 

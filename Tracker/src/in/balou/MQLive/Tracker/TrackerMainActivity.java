@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -38,6 +39,9 @@ public class TrackerMainActivity extends Activity
             isOn = true;
             backgroundService = new Intent(this, TrackerService.class);
             startService(backgroundService);
+
+            ((Button)findViewById(id.buttonOn)).setEnabled(false);
+            ((Button)findViewById(id.buttonOff)).setEnabled(true);
         }
     }
 
@@ -45,9 +49,12 @@ public class TrackerMainActivity extends Activity
     {
         if (isOn)
         {
-            Log.d("buttonOff", "stoping");
+            Log.d("buttonOff", "stopping");
             isOn = false;
             stopService(backgroundService);
+
+            ((Button)findViewById(id.buttonOn)).setEnabled(true);
+            ((Button)findViewById(id.buttonOff)).setEnabled(false);
         }
     }
 }

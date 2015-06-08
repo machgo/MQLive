@@ -42,8 +42,14 @@ public class Controller implements Initializable, MapComponentInitializedListene
         //register controller for model-updates
         data.addObserver(this);
 
+        altitudeGraph.setCreateSymbols(false);
         altitudeGraph.getData().add(new XYChart.Series<>());
         startTime = System.currentTimeMillis() / 1000l;
+
+        //not working yet
+        //yAxis.lowerBoundProperty().bind(data.lowestAltitude);
+        //yAxis.upperBoundProperty().bind(data.highestAltitude);
+
     }
 
     @Override
@@ -58,7 +64,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
                 .rotateControl(false)
                 .scaleControl(false)
                 .streetViewControl(false)
-                .zoomControl(false)
+                .zoomControl(true)
                 .zoom(16);
 
         map = mapView.createMap(mapOptions);
