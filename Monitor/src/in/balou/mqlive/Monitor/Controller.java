@@ -12,9 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import sun.misc.ProxyGenerator;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
