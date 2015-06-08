@@ -9,10 +9,11 @@ import java.util.ArrayList;
 /**
  * Created by marco on 07/06/15.
  */
-public class MqData
+public class MqData extends Observable
 {
+    private static final String serverName = "tcp://188.166.105.27:1883";
+    private static final String serverTopic = "ch/mqsender/Test1";
     private MqttClient client;
-    private ArrayList<Observer> observers;
     private ArrayList<TrackPoint> points;
 
     public DoubleProperty lowestAltitude;
@@ -29,11 +30,9 @@ public class MqData
 
     public MqData()
     {
-        String serverName = "tcp://188.166.105.27:1883";
-        observers = new ArrayList<Observer>();
         points = new ArrayList<TrackPoint>();
         lowestAltitude = new SimpleDoubleProperty(0.0);
-        highestAltitude = new SimpleDoubleProperty(2000.0);
+        highestAltitude = new SimpleDoubleProperty(100.0);
 
         try
         {
@@ -58,7 +57,8 @@ public class MqData
                     points.add(t);
                     if (lowestAltitude.getValue() > t.getAltitude() || lowestAltitude.getValue() == 0.0)
                         lowestAltitude.setValue(t.getAltitude());
-
+                    if (highestAltitude.getValue() < t.getAltitude())
+                        highestAltitude.setValue(t.getAltitude());
 
                     //inform Observers
                     informAll();
@@ -70,21 +70,11 @@ public class MqData
 
                 }
             });
-            client.subscribe("ch/mqsender/Test1");
+            client.subscribe(serverTopic);
         } catch (MqttException e)
         {
             System.out.println("Connection to mqtt-broker failed, please check connection...");
             e.printStackTrace();
         }
-    }
-
-    public void addObserver(Observer observer)
-    {
-        observers.add(observer);
-    }
-
-    private void informAll()
-    {
-        observers.forEach(x -> x.update());
     }
 }

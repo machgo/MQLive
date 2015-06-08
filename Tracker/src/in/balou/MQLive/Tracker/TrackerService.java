@@ -7,6 +7,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.os.IBinder;
+import android.util.Log;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.io.IOException;
@@ -42,6 +43,7 @@ public class TrackerService extends Service
         } catch (MqttException e)
         {
             e.printStackTrace();
+            Log.e(getClass().getCanonicalName(), "error while connecting to mqtt-server");
         } catch (IOException e)
         {
             e.printStackTrace();

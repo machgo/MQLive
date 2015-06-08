@@ -4,15 +4,15 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
 <GridPane fx:controller="in.balou.mqlive.Monitor.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" prefHeight="750.0" prefWidth="761.0">
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
     <VBox>
-        <GoogleMapView fx:id="mapView" prefHeight="750.0" prefWidth="761.0"/>
-        <LineChart fx:id="altitudeGraph" prefWidth="761.0" prefHeight="100.0">
+        <GoogleMapView fx:id="mapView" prefHeight="700.0" prefWidth="761.0"/>
+        <LineChart fx:id="altitudeGraph" prefWidth="761.0" prefHeight="150.0">
             <xAxis>
-                <NumberAxis fx:id="xAxis" side="BOTTOM" />
+                <NumberAxis fx:id="xAxis" side="BOTTOM" label="time (s)"/>
             </xAxis>
             <yAxis>
-                <NumberAxis fx:id="yAxis" side="LEFT" lowerBound="450.0" upperBound="1000.0" autoRanging="false"/>
+                <NumberAxis fx:id="yAxis" side="LEFT" autoRanging="false" label="altitude (m)"/>
             </yAxis>
         </LineChart>
     </VBox>

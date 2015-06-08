@@ -15,7 +15,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
         primaryStage.setTitle("MQLive Monitor");
-        primaryStage.setScene(new Scene(root, 761, 750));
+        primaryStage.setScene(new Scene(root, 761, 850));
         primaryStage.show();
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>()
         {

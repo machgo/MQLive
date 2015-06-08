@@ -5,6 +5,7 @@ import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.object.GoogleMap;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.javascript.object.MapOptions;
+import com.lynden.gmapsfx.javascript.object.MapShape;
 import com.lynden.gmapsfx.shapes.Polyline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -37,18 +38,15 @@ public class Controller implements Initializable, MapComponentInitializedListene
     public void initialize(URL location, ResourceBundle resources)
     {
         mapView.addMapInializedListener(this);
-
         data = new MqData();
-        //register controller for model-updates
-        data.addObserver(this);
+        startTime = 0;
 
         altitudeGraph.setCreateSymbols(false);
         altitudeGraph.getData().add(new XYChart.Series<>());
-        startTime = System.currentTimeMillis() / 1000l;
 
-        //not working yet
-        //yAxis.lowerBoundProperty().bind(data.lowestAltitude);
-        //yAxis.upperBoundProperty().bind(data.highestAltitude);
+        //dynamic boundaries for yAxis
+        yAxis.lowerBoundProperty().bind(data.lowestAltitude);
+        yAxis.upperBoundProperty().bind(data.highestAltitude);
 
     }
 
@@ -72,12 +70,18 @@ public class Controller implements Initializable, MapComponentInitializedListene
         trackLine = new Polyline();
         map.addMapShape(trackLine);
 
+        //now we are ready to receive updates
+        data.addObserver(this);
     }
 
     @Override
     public void update()
     {
         Platform.runLater(() -> {
+            //if first point, start timer
+            if (startTime == 0)
+                startTime = System.currentTimeMillis() / 1000l;
+
             //calculating seconds since start of tracking
             long seconds = (System.currentTimeMillis() / 1000l)-startTime;
 
