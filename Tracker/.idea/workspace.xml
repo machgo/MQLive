@@ -18,7 +18,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3204e58-6b2e-4fa7-817f-80dc08b2ff1f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Monitor/src/in/balou/mqlive/Monitor/Main.java" afterPath="$PROJECT_DIR$/../Monitor/src/in/balou/mqlive/Monitor/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Monitor/src/in/balou/mqlive/Monitor/Controller.java" afterPath="$PROJECT_DIR$/../Monitor/src/in/balou/mqlive/Monitor/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Monitor/src/in/balou/mqlive/Monitor/MqData.java" afterPath="$PROJECT_DIR$/../Monitor/src/in/balou/mqlive/Monitor/MqData.java" />
     </list>
     <ignored path="MQLiveTracker.iws" />
     <ignored path=".idea/workspace.xml" />

@@ -41,7 +41,7 @@ public class MqData
                 @Override
                 public void connectionLost(Throwable throwable)
                 {
-
+                    System.out.println("Connection lost...");
                 }
 
                 @Override
@@ -63,6 +63,7 @@ public class MqData
             client.subscribe("ch/mqsender/Test1");
         } catch (MqttException e)
         {
+            System.out.println("Connection to mqtt-broker failed, please check connection...");
             e.printStackTrace();
         }
     }

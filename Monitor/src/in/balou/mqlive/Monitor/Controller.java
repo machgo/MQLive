@@ -25,7 +25,6 @@ public class Controller implements Initializable, MapComponentInitializedListene
     @FXML
     public NumberAxis yAxis;
 
-
     @FXML
     private GoogleMapView mapView;
 
@@ -43,11 +42,11 @@ public class Controller implements Initializable, MapComponentInitializedListene
         mapView.addMapInializedListener(this);
 
         data = new MqData();
+        //register controller for model-updates
         data.addObserver(this);
 
         altitudeGraph.getData().add(new XYChart.Series<>());
         startTime = System.currentTimeMillis() / 1000l;
-
     }
 
     @Override
@@ -55,6 +54,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
     {
         MapOptions mapOptions = new MapOptions();
 
+        //map options
         mapOptions.center(new LatLong(47.6097, -122.3331))
                 .overviewMapControl(false)
                 .panControl(false)
@@ -65,6 +65,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
                 .zoom(16);
 
         map = mapView.createMap(mapOptions);
+        //adding trackline for gps-track (no points/data yet)
         trackLine = new Polyline();
         map.addMapShape(trackLine);
 
@@ -74,13 +75,16 @@ public class Controller implements Initializable, MapComponentInitializedListene
     public void update()
     {
         Platform.runLater(() -> {
+            //calculating seconds since start of tracking
             long seconds = (System.currentTimeMillis() / 1000l)-startTime;
+
             TrackPoint p = data.getLatestPoint();
             LatLong ll = new LatLong(p.getLatitude(), p.getLongitude());
             trackLine.getPath().push(ll);
-            altitudeGraph.getData().get(0).getData().add(new XYChart.Data(seconds, p.getAltitude()));
-
             map.setCenter(ll);
+
+            //adding data to altitude-graph
+            altitudeGraph.getData().get(0).getData().add(new XYChart.Data(seconds, p.getAltitude()));
         });
     }
 }
